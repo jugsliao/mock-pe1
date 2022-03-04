@@ -20,3 +20,19 @@ public class IntegerToString implements Transformer<Integer,String> {
     return "\"" + t.toString() + "\"";
   }
 }
+
+class LastDigitsOfHashCode implements Transformer<Object, Integer> {
+  private int lastDigits;
+
+  public LastDigitsOfHashCode(int lastDigits) {
+    this.lastDigits = lastDigits;
+  }
+
+  @Override
+  public Integer transform(Object obj) {
+    int hashCode = obj.hashCode();
+    String strHashCode = String.valueOf(hashCode);
+    String strLastDigits = strHashCode.substring(strHashCode.length() - this.lastDigits);
+    return Integer.parseInt(strLastDigits);
+  } 
+}
